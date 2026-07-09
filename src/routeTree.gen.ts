@@ -15,6 +15,8 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppTransactionsRouteImport } from './routes/app.transactions'
+import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppCoachRouteImport } from './routes/app.coach'
 import { Route as AppBudgetsRouteImport } from './routes/app.budgets'
 
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -47,6 +49,16 @@ const AppTransactionsRoute = AppTransactionsRouteImport.update({
   path: '/transactions',
   getParentRoute: () => AppRoute,
 } as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCoachRoute = AppCoachRouteImport.update({
+  id: '/coach',
+  path: '/coach',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppBudgetsRoute = AppBudgetsRouteImport.update({
   id: '/budgets',
   path: '/budgets',
@@ -59,6 +71,8 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/app/budgets': typeof AppBudgetsRoute
+  '/app/coach': typeof AppCoachRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/transactions': typeof AppTransactionsRoute
   '/app/': typeof AppIndexRoute
 }
@@ -67,6 +81,8 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/app/budgets': typeof AppBudgetsRoute
+  '/app/coach': typeof AppCoachRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/transactions': typeof AppTransactionsRoute
   '/app': typeof AppIndexRoute
 }
@@ -77,6 +93,8 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/app/budgets': typeof AppBudgetsRoute
+  '/app/coach': typeof AppCoachRoute
+  '/app/settings': typeof AppSettingsRoute
   '/app/transactions': typeof AppTransactionsRoute
   '/app/': typeof AppIndexRoute
 }
@@ -88,6 +106,8 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/app/budgets'
+    | '/app/coach'
+    | '/app/settings'
     | '/app/transactions'
     | '/app/'
   fileRoutesByTo: FileRoutesByTo
@@ -96,6 +116,8 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/app/budgets'
+    | '/app/coach'
+    | '/app/settings'
     | '/app/transactions'
     | '/app'
   id:
@@ -105,6 +127,8 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/app/budgets'
+    | '/app/coach'
+    | '/app/settings'
     | '/app/transactions'
     | '/app/'
   fileRoutesById: FileRoutesById
@@ -160,6 +184,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppTransactionsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/coach': {
+      id: '/app/coach'
+      path: '/coach'
+      fullPath: '/app/coach'
+      preLoaderRoute: typeof AppCoachRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/budgets': {
       id: '/app/budgets'
       path: '/budgets'
@@ -172,12 +210,16 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppBudgetsRoute: typeof AppBudgetsRoute
+  AppCoachRoute: typeof AppCoachRoute
+  AppSettingsRoute: typeof AppSettingsRoute
   AppTransactionsRoute: typeof AppTransactionsRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppBudgetsRoute: AppBudgetsRoute,
+  AppCoachRoute: AppCoachRoute,
+  AppSettingsRoute: AppSettingsRoute,
   AppTransactionsRoute: AppTransactionsRoute,
   AppIndexRoute: AppIndexRoute,
 }
